@@ -36,8 +36,8 @@ namespace RSAConsoleApp
             IAssymetricKeyStorage assymetricStorage;
 
             // Comment either one of this lines to test for memory or xml storage
-            //assymetricStorage = new AssymetricKeyStoreInMemory();
-            assymetricStorage = new AssymetricKeyFromXmlFile("c:/privkey.xml", "c:/pubkey.xml");
+            assymetricStorage = new AssymetricKeyStoreInMemory();
+            //assymetricStorage = new AssymetricKeyFromXmlFile("c:/privkey.xml", "c:/pubkey.xml");
 
             Console.WriteLine(assymetricStorage.GetType().ToString()); // to see if we are storing it on memory or xml file
 
@@ -47,6 +47,9 @@ namespace RSAConsoleApp
                 // Write to string the Keys
                 var privXmlString = encrypterRSA.ToXmlString(true);
                 var publicXmlString = encrypterRSA.ToXmlString(false);
+
+                Console.WriteLine("\nPrivate Key: " + privXmlString);
+                Console.WriteLine("\nPublic Key: " + publicXmlString + "\n");
 
                 assymetricStorage.StorePrivateKey(privXmlString);
                 assymetricStorage.StorePublicKey(publicXmlString);
